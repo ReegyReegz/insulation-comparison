@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SANS 10400-XA Insulation Compliance & Cost Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+       .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+           .chart-container {
+                height: 400px;
+            }
+        }
+       .text-vibrant-cyan { color: #00E5FF; }
+       .text-vibrant-magenta { color: #FF007F; }
+       .text-vibrant-yellow { color: #FFEA00; }
+       .bg-vibrant-cyan { background-color: #00E5FF; }
+       .card {
+            background-color: #1e293b;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-top: 4px solid #00E5FF;
+        }
+       .stat-box {
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="antialiased pb-12">
+
+    <header class="bg-gray-900 border-b border-gray-800 py-12 mb-8 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
+                <span class="text-vibrant-cyan">Insulation</span> Intelligence
+            </h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                Comparing SANS 10400-XA compliance and actual project costs between professional Thermo-Floc and retail DIY alternatives.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 flex items-center">
+                <span class="text-vibrant-magenta text-4xl mr-3">&#9881;</span> The SANS 10400-XA Mandate
+            </h2>
+            <div class="card grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-gray-300 text-lg mb-4 leading-relaxed">
+                        To meet the South African National Standard (SANS 10400-XA), a roof assembly requires a minimum Total R-Value of <strong>3.7</strong>.
+                    </p>
+                    <p class="text-gray-300 text-lg mb-4 leading-relaxed">
+                        With a typical roof assembly (tiles/sheet and ceiling) contributing <strong>0.38</strong>, the added insulation must provide at least <strong>3.32</strong> to achieve full legal compliance.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <div class="stat-box">
+                            <div class="text-vibrant-yellow text-4xl font-bold mb-1">3.70</div>
+                            <div class="text-sm text-gray-400 uppercase tracking-wide">Target R-Value</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="text-vibrant-cyan text-4xl font-bold mb-1">3.32</div>
+                            <div class="text-sm text-gray-400 uppercase tracking-wide">Required Insulation</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="chart-container">
+                        <canvas id="sansComplianceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6 flex items-center">
+                <span class="text-vibrant-cyan text-4xl mr-3">&#8352;</span> The Value Comparison: DIY vs. Pro Install
+            </h2>
+            <div class="card grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="order-2 md:order-1">
+                    <div class="chart-container">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <p class="text-gray-300 text-lg mb-4 leading-relaxed">
+                        Most retail prices <strong>exclude</strong> labor, safety gear, and the time required for a difficult DIY install. At <strong>R95/m&sup2; fully installed</strong> (incl. VAT), Thermo-Floc is significantly cheaper than simply buying the material alone for many high-performance rolls.
+                    </p>
+                    <ul class="space-y-3 mt-6">
+                        <li class="flex items-start">
+                            <span class="text-vibrant-magenta mr-2 mt-1">&#10004;</span>
+                            <span class="text-gray-300"><strong>Retail Rolls:</strong> Buying material like Isotherm (±R130/m&sup2;) still requires you to crawl through the roof space and install it yourself.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-vibrant-cyan mr-2 mt-1">&#10004;</span>
+                            <span class="text-gray-300"><strong>Thermo-Floc:</strong> Professional installation included at R95/m&sup2;. Seamless coverage, formaldehyde-free, and rapid application.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h3 class="text-2xl font-bold mb-6 text-center">Product R-Value Comparison</h3>
+            <div class="card">
+                <div class="chart-container">
+                    <canvas id="rValueChart"></canvas>
+                </div>
+                <p class="text-sm text-gray-400 mt-4 text-center">
+                    Thermo-Floc installed at 140mm provides a Product R-Value of approximately 3.28, which, when combined with your existing ceiling assembly (0.38), hits the compliance target.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function wrapLabel(label, maxChars = 16) {
+            if (label.length <= maxChars) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + words[i].length + 1 <= maxChars) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const commonTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const globalChartOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            color: '#94a3b8',
+            plugins: {
+                legend: { labels: { color: '#e2e8f0' } },
+                tooltip: commonTooltipConfig
+            }
+        };
+
+        // SANS Chart
+        const ctxSans = document.getElementById('sansComplianceChart').getContext('2d');
+        new Chart(ctxSans, {
+            type: 'doughnut',
+            data: {
+                labels: ['Roof Assembly', 'Insulation Required'].map(l => wrapLabel(l)),
+                datasets: [{
+                    data: [0.38, 3.32],
+                    backgroundColor: ['#334155', '#00E5FF'],
+                    borderColor: '#1e293b',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+               ...globalChartOptions,
+                cutout: '70%',
+                plugins: {...globalChartOptions.plugins, legend: { position: 'bottom' } }
+            }
+        });
+
+        // R-Value Chart
+        const ctxRValue = document.getElementById('rValueChart').getContext('2d');
+        new Chart(ctxRValue, {
+            type: 'bar',
+            data: {
+                labels: ['Thermo-Floc (140mm)', 'Aerolite (135mm)', 'Isotherm (145mm)', 'Fabufill (135mm)'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: 'Product R-Value',
+                    data: [3.28, 3.38, 3.37, 3.30],
+                    backgroundColor: ['#FF007F', '#334155', '#334155', '#334155'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+               ...globalChartOptions,
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#334155' }, title: { display: true, text: 'R-Value' } }
+                }
+            }
+        });
+
+        // Cost Chart
+        const ctxCost = document.getElementById('costChart').getContext('2d');
+        new Chart(ctxCost, {
+            type: 'bar',
+            data: {
+                labels: ['Thermo-Floc (Installed)', 'Isotherm (Retail)', 'Fabufill (Retail)', 'Aerolite (Retail)'].map(l => wrapLabel(l)),
+                datasets: [{
+                    label: 'Price per m² (ZAR)',
+                    data: [95, 130, 125, 110],
+                    backgroundColor: ['#00E5FF', '#FFEA00', '#FFEA00', '#FFEA00'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+               ...globalChartOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: { beginAtZero: true, grid: { color: '#334155' }, ticks: { callback: v => 'R ' + v } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
